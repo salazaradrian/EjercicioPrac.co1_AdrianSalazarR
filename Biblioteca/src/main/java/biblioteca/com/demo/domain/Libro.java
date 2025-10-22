@@ -45,11 +45,11 @@ public class Libro {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Constructor vacío
+    
     public Libro() {
     }
 
-    // Constructor con campos esenciales
+    
     public Libro(String titulo, String autor, Categoria categoria) {
         this.titulo = titulo;
         this.autor = autor;
@@ -150,7 +150,7 @@ public void setPrecio(BigDecimal precio) {
         this.updatedAt = updatedAt;
     }
 
-    // Métodos para manejar las fechas automáticamente
+    
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();

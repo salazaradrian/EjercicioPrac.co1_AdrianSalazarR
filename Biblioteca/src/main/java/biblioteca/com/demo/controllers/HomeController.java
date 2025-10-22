@@ -15,9 +15,9 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        // Tomar un libro como destacado si existe
+      
         Libro libroDestacado = libroRepository.findAll().stream().findFirst().orElse(null);
         model.addAttribute("libroDestacado", libroDestacado);
-        return "index"; // index.html
+        return "index"; 
     }
 }
