@@ -1,15 +1,42 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Biblioteca</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+</head>
+<body>
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/" th:text="'Biblioteca'"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/" th:text="'Inicio'"></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/libros" th:text="'Libros'"></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/categorias" th:text="'Categorías'"></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sugerencias" th:text="'Quejas y Sugerencias'"></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<footer th:fragment="footer" class="bg-dark text-white text-center p-3">
+    <p>&copy; 2025 Biblioteca. Todos los derechos reservados.</p>
+</footer>
+
+<div th:fragment="content">
+    <!-- Aquí se insertará el contenido de cada página -->
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
 </html>
