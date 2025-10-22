@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quejas y Sugerencias - Biblioteca</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container">
+            <a class="navbar-brand display-6 fw-bold" href="/">Biblioteca</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="/">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="/libros">Libros</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold active" href="/quejas">Quejas y Sugerencias</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Formulario de Quejas y Sugerencias</h2>
+        </div>
+
+        <form th:action="@{/quejas/guardar}" th:object="${queja}" method="post" class="mb-5">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombreCliente}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" th:field="*{email}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" th:field="*{telefono}">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Tipo</label>
+                    <select class="form-select" th:field="*{tipo}" required>
+                        <option th:each="t : ${T(biblioteca.com.demo.domain.TipoQueja).values()}" 
+                                th:value="${t}" th:text="${t}"></option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Asunto</label>
+                    <input type="text" class="form-control" th:field="*{asunto}">
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Mensaje</label>
+                    <textarea class="form-control" th:field="*{mensaje}" rows="4" required></textarea>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"></i> Enviar</button>
+                </div>
+            </div>
+        </form>
+
+        <h3 class="fw-bold mb-3">Lista de Quejas y Sugerencias</h3>
+        <div class="row g-4">
+            <div class="col-md-4" th:each="q : ${quejas}">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${q.tipo} + ' - ' + ${q.asunto}">Tipo - Asunto</h5>
+                        <p><strong>Nombre:</strong> <span th:text="${q.nombreCliente}"></span></p>
+                        <p><strong>Email:</strong> <span th:text="${q.email}"></span></p>
+                        <p><strong>Teléfono:</strong> <span th:text="${q.telefono}"></span></p>
+                        <p th:text="${q.mensaje}"></p>
+                        <p><strong>Fecha:</strong> <span th:text="${#temporals.format(q.createdAt, 'dd/MM/yyyy HH:mm')}"></span></p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a th:href="@{'/quejas/eliminar/' + ${q.id}}" class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Seguro que deseas eliminar esta queja?');">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-primary text-white py-4 mt-5">
+    <div class="container text-center">
+        <p class="mb-0 fs-5">&copy; 2025 Biblioteca. Todos los derechos reservados.</p>
+        <small class="fs-6">Gracias por ayudarnos a mejorar con tus comentarios</small>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
