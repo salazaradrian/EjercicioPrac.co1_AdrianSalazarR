@@ -60,7 +60,7 @@
                                 <h5 th:text="${libro.titulo}" class="card-title">Título</h5>
                                 <p th:text="${libro.descripcion}" class="card-text text-truncate"></p>
                                 <p><strong>Autor:</strong> <span th:text="${libro.autor}"></span></p>
-                                <p><strong>Precio:</strong> $<span th:text="${libro.precio}"></span></p>
+                                <p><strong>Precio:</strong> ₡<span th:text="${libro.precio}"></span></p>
                                 <p><strong>Categoría:</strong> <span th:text="${libro.categoria.nombre}"></span></p>
                                 <p><strong>Disponible:</strong> <span th:text="${libro.disponible} ? 'Sí' : 'No'"></span></p>
                             </div>
